@@ -4,13 +4,13 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-flex align-items-center justify-content-between">
-                <h4 class="mb-0 font-size-18">Starter Page</h4>
+                <h4 class="mb-0 font-size-18">Dashboard</h4>
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <ng-container>
-                            <li class="breadcrumb-item"><a href="javascript: void(0);">Utility</a>
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboards</a>
                             </li>
-                            <li class="breadcrumb-item active">Starter Page
+                            <li class="breadcrumb-item active">Dashboard
                             </li>
                         </ng-container>
                     </ol>
@@ -19,4 +19,207 @@
         </div>
     </div>
     <!-- end page title -->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">Latest Transaction</h4>
+                    <div class="table-responsive mb-0">
+                        <table class="table table-centered table-nowrap">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="align-middle">Order ID</th>
+                                    <th class="align-middle">Billing Name</th>
+                                    <th class="align-middle">Date</th>
+                                    <th class="align-middle">Total</th>
+                                    <th class="align-middle">Payment Status</th>
+                                    <th class="align-middle">Payment Method</th>
+                                    <th class="align-middle">View Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let data of transactions">
+                                    <td>
+                                        {{data.id}}
+                                    </td>
+                                    <td>{{data.name}}</td>
+                                    <td>{{data.date}}</td>
+                                    <td>{{data.total}}</td>
+                                    <td>
+                                        <span class="badge badge-pill badge-soft-success font-size-11" [ngClass]=" { 'badge-soft-danger': data.status === 'Chargeback',
+                                              'badge-soft-warning':data.status === 'Refund' }">{{data.status}}</span>
+                                    </td>
+                                    <td>
+                                        <i class="fab {{data.payment[0]}} me-1"></i>
+                                        {{data.payment[1]}}
+                                    </td>
+                                    <td>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary btn-sm btn-rounded"
+                                            (click)="openModal(content, data)">View
+                                            Details</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <ng-template #content role="document" let-modal>
+                            <div class="modal-header">
+                                <h5 class="modal-title mt-0">Order Details</h5>
+                                <button type="button" class="btn-close" aria-hidden="true"
+                                    (click)="modal.dismiss('Cross click')"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="mb-2">
+                                    Product id:
+                                    <span class="text-primary">{{transaction.id}}</span>
+                                </p>
+                                <p class="mb-4">
+                                    Billing Name:
+                                    <span class="text-primary">{{transaction.name}}</span>
+                                </p>
+                                <div>
+                                    <form (ngSubmit)="typeSubmit()" [formGroup]="typeValidationForm">
+                                        <div class="mb-3">
+                                            <label class="form-label">Required</label>
+                                            <input type="text" class="form-control" formControlName="text"
+                                                [ngClass]="{'is-invalid': typesubmit && type.text.errors}"
+                                                placeholder="Type something" />
+                                            <div *ngIf="typesubmit && type.text.errors" class="invalid-feedback">
+                                                <span *ngIf="type.text.errors.required">This value is required.</span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Equal To</label>
+                                            <div>
+                                                <input type="password" class="form-control" placeholder="Password"
+                                                    formControlName="password"
+                                                    [ngClass]="{'is-invalid': typesubmit && type.password.errors}" />
+                                                <div *ngIf="typesubmit && type.password.errors"
+                                                    class="invalid-feedback">
+                                                    <span *ngIf="type.password.errors.required">This value is
+                                                        required.</span>
+                                                    <span *ngIf="type.password.errors.minlength">Password must be at
+                                                        least 6
+                                                        characters.</span>
+                                                </div>
+                                            </div>
+                                            <div class="mt-2">
+                                                <input type="password" class="form-control"
+                                                    placeholder="Re-Type Password" formControlName="confirmpwd"
+                                                    [ngClass]="{'is-invalid': typesubmit && type.confirmpwd.errors}" />
+                                                <div *ngIf="typesubmit && type.confirmpwd.errors"
+                                                    class="invalid-feedback">
+                                                    <span *ngIf="type.confirmpwd.errors.required">This value is
+                                                        required.</span>
+                                                    <span *ngIf="type.confirmpwd.errors.mustMatch">This value should be
+                                                        the same.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">E-Mail</label>
+                                            <div>
+                                                <input type="email" class="form-control" formControlName="email"
+                                                    [ngClass]="{'is-invalid': typesubmit && type.email.errors}"
+                                                    placeholder="Enter a valid e-mail" />
+                                                <div *ngIf="typesubmit && type.email.errors" class="invalid-feedback">
+                                                    <span *ngIf="type.email.errors.required">This value is
+                                                        required.</span>
+                                                    <span *ngIf="type.email.errors.pattern">This value should be a valid
+                                                        email.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">URL</label>
+                                            <div>
+                                                <input type="url" class="form-control" placeholder="URL"
+                                                    formControlName="url"
+                                                    [ngClass]="{'is-invalid': typesubmit && type.url.errors}" />
+                                                <div *ngIf="typesubmit && type.url.errors" class="invalid-feedback">
+                                                    <span *ngIf="type.url.errors.required">This value is
+                                                        required.</span>
+                                                    <span *ngIf="type.url.errors.pattern">This value should be a valid
+                                                        url.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Digits</label>
+                                            <div>
+                                                <input formControlName="digits" type="text" class="form-control"
+                                                    [ngClass]="{'is-invalid': typesubmit && type.digits.errors}"
+                                                    placeholder="Enter only digits" />
+                                                <div *ngIf="typesubmit && type.digits.errors" class="invalid-feedback">
+                                                    <span *ngIf="type.digits.errors.required">This value is
+                                                        required.</span>
+                                                    <span *ngIf="type.digits.errors.pattern">This value should be
+                                                        digits.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Number</label>
+                                            <div>
+                                                <input formControlName="number" type="text" class="form-control"
+                                                    [ngClass]="{'is-invalid': typesubmit && type.number.errors}"
+                                                    placeholder="Enter only numbers">
+                                                <div *ngIf="typesubmit && type.number.errors" class="invalid-feedback">
+                                                    <span *ngIf="type.number.errors.required">This value is
+                                                        required.</span>
+                                                    <span *ngIf="type.number.errors.pattern">This value should be a
+                                                        valid number.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Alphanumeric</label>
+                                            <div>
+                                                <input formControlName="alphanum" type="text" class="form-control"
+                                                    [ngClass]="{'is-invalid': typesubmit && type.alphanum.errors}"
+                                                    placeholder="Enter alphanumeric value" />
+                                                <div *ngIf="typesubmit && type.alphanum.errors"
+                                                    class="invalid-feedback">
+                                                    <span *ngIf="type.alphanum.errors.required">This value is
+                                                        required.</span>
+                                                    <span *ngIf="type.alphanum.errors.pattern">This value should be
+                                                        alphanumeric.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Textarea</label>
+                                            <div>
+                                                <textarea formControlName="textarea" class="form-control" rows="5"
+                                                    [ngClass]="{'is-invalid': typesubmit && type.textarea.errors}"></textarea>
+                                                <div *ngIf="typesubmit && type.textarea.errors"
+                                                    class="invalid-feedback">
+                                                    <span *ngIf="type.textarea.errors.required">This value is
+                                                        required.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-wrap gap-2">
+                                            <button type="submit" class="btn btn-primary waves-effect waves-light">
+                                                Submit
+                                            </button>
+                                            <button type="reset" class="btn btn-secondary waves-effect">
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+                            </div>
+                        </ng-template>
+                    </div>
+                    <!-- end table -->
+                </div>
+            </div>
+        </div>
+    </div>
 </div> <!-- container-fluid -->
