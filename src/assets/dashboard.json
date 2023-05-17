@@ -13,7 +13,7 @@
       "name": "Jamal Burnett",
       "date": "07 Oct, 2019",
       "total": "$380",
-      "status": "Chargeback",
+      "status": "ChargeBack",
       "payment": ["fa-cc-visa", "Visa"],
       "index": 2
     },

@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { EventService } from '../../../core/services/event.service';
-
-import { ConfigService } from '../../../core/services/config.service';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { default as volvoSchema } from './schema.model.json';
+import { FormControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { transactions } from './data';
 
 @Component({
   selector: 'app-default',
@@ -11,31 +10,40 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
   styleUrls: ['./default.component.scss']
 })
 export class DefaultComponent implements OnInit {
-  transactions: Array<[]>;
-  transaction: any;
+  transactions: any;
+  orderValidationForm: UntypedFormGroup;
+  transferValidationForm: UntypedFormGroup;
+  orderSubmit: boolean;
+  transferSubmit: boolean;
+  fields: any[] = [];
 
-  typeValidationForm: UntypedFormGroup;
-  typesubmit: boolean;
-
-  constructor(private modalService: NgbModal, private configService: ConfigService, public formBuilder: UntypedFormBuilder) {
+  constructor(private modalService: NgbModal, public formBuilder: UntypedFormBuilder) {
   }
 
   ngOnInit() {
     /**
      * Type validation form
     */
-    this.typeValidationForm = this.formBuilder.group({
-      text: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-      url: ['', [Validators.required, Validators.pattern('https?://.+')]],
-      digits: ['', [Validators.required, Validators.pattern('[0-9]+')]],
-      number: ['', [Validators.required, Validators.pattern('[0-9]+')]],
-      alphanum: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
-      textarea: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmpwd: ['', Validators.required]
+    this.orderValidationForm = this.formBuilder.group({});
+    for (const field of Object.keys(volvoSchema.properties.Cmr.properties)) {
+      const type = Object.values(volvoSchema.properties.Cmr.properties[field])[0];
+      this.fields.push({
+        name: field,
+        type: type === 'string' ? 'text' : type,
+        value: ''
+      });
+      this.orderValidationForm.addControl(
+        field,
+        new FormControl({value: '', disabled:  field === 'CmrID'}, Object.values(volvoSchema.properties.Cmr.required).includes(field) ? [Validators.required] : [])
+      );
+    }
+
+    this.transferValidationForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]]
     });
-    this.typesubmit = false;
+
+    this.orderSubmit = false;
+    this.transferSubmit = false;
 
     /**
      * Fetches the data
@@ -43,14 +51,11 @@ export class DefaultComponent implements OnInit {
     this.fetchData();
   }
 
-
   /**
    * Fetches the data
    */
   private fetchData() {
-    this.configService.getConfig().subscribe(data => {
-      this.transactions = data.transactions;
-    });
+    this.transactions = transactions;
   }
 
 
@@ -58,16 +63,45 @@ export class DefaultComponent implements OnInit {
   * Open modal
   * @param content modal content
   */
-  openModal(content: any, transaction: any) {
-    this.transaction = transaction;
-    this.modalService.open(content, { centered: true });
+  openOrderModal(content: any, data: any) {
+    this.orderSubmit = false;
+    this.fields.forEach(a => a.value = data[a.name] ? data[a.name] : '');
+    this.modalService.open(content, { size: 'xl', centered: true });
   }
+
+  openTransferModal(transfer: any) {
+    this.transferSubmit = false;
+    this.modalService.open(transfer, { size: 'lg', centered: true });
+  }
+
 
   get type() {
-    return this.typeValidationForm.controls;
+    return this.orderValidationForm.controls;
   }
 
-  typeSubmit() {
-    this.typesubmit = true;
+  get transfer() {
+    return this.transferValidationForm.controls;
+  }
+
+
+  submitOrderForm() {
+    this.orderSubmit = true;
+    let selectedTransaction: any = {};
+
+    Object.keys(this.orderValidationForm.controls).forEach(key => {
+      selectedTransaction[key] = this.orderValidationForm.get(key).value;
+    });
+
+    let indexToUpdate = this.transactions.findIndex(item => item.CmrID === selectedTransaction.CmrID);
+    this.transactions[indexToUpdate] = selectedTransaction;
+
+    console.log("2");
+    console.log(selectedTransaction);
+
+    this.modalService.dismissAll();
+  }
+
+  submitTransferForm() {
+    this.transferSubmit = true;
   }
 }

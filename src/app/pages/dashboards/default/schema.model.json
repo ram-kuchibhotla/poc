@@ -1,0 +1,129 @@
+{
+  "type": "object",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "Cmr": {
+      "type": "object",
+      "properties": {
+        "CmrID": {
+          "type": "string"
+        },
+        "Version": {
+          "type": "string"
+        },
+        "Controller": {
+          "type": "string"
+        },
+        "Sender": {
+          "type": "string"
+        },
+        "Consignee": {
+          "type": "string"
+        },
+        "PlaceOfDeliveryOfTheGoods": {
+          "type": "string"
+        },
+        "PlaceOfTakingOverTheGoods": {
+          "type": "string"
+        },
+        "DocumentsAttached": {
+          "type": "string"
+        },
+        "MarksAndNos": {
+          "type": "string"
+        },
+        "NumberOfPackages": {
+          "type": "number"
+        },
+        "MethodOfPacking": {
+          "type": "string"
+        },
+        "NatureOfTheGoods": {
+          "type": "string"
+        },
+        "StatisticalNr": {
+          "type": "string"
+        },
+        "GrossWeightInKg": {
+          "type": "number"
+        },
+        "VolumeInM3": {
+          "type": "string"
+        },
+        "SendersInstructions": {
+          "type": "string"
+        },
+        "CashOnDelivery": {
+          "type": "string"
+        },
+        "InstructionsAsToPaymentCarriage": {
+          "type": "string"
+        },
+        "Carrier": {
+          "type": "string"
+        },
+        "SuccessiveCarriers": {
+          "type": "string"
+        },
+        "CarriersReservationAndObservations": {
+          "type": "string"
+        },
+        "TotalPaidSender": {
+          "type": "string"
+        },
+        "TotalPaidConsignee": {
+          "type": "string"
+        },
+        "SpecialAgreements": {
+          "type": "string"
+        },
+        "EstablishedInOn": {
+          "type": "string"
+        },
+        "SignatureOfTheSender": {
+          "type": "string"
+        },
+        "SignatureOfTheCarrier": {
+          "type": "string"
+        },
+        "SignatureOfTheConsignee": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "CmrID",
+        "Version",
+        "Controller",
+        "Sender",
+        "Consignee",
+        "PlaceOfDeliveryOfTheGoods",
+        "PlaceOfTakingOverTheGoods",
+        "DocumentsAttached",
+        "MarksAndNos",
+        "NumberOfPackages",
+        "MethodOfPacking",
+        "NatureOfTheGoods",
+        "StatisticalNr",
+        "GrossWeightInKg",
+        "VolumeInM3",
+        "SendersInstructions",
+        "CashOnDelivery",
+        "InstructionsAsToPaymentCarriage",
+        "Carrier",
+        "SuccessiveCarriers",
+        "CarriersReservationAndObservations",
+        "TotalPaidSender",
+        "TotalPaidConsignee",
+        "SpecialAgreements",
+        "EstablishedInOn",
+        "SignatureOfTheSender",
+        "SignatureOfTheCarrier",
+        "SignatureOfTheConsignee"
+      ]
+    }
+  },
+  "definitions": null,
+  "required": [
+    "Cmr"
+  ]
+}
