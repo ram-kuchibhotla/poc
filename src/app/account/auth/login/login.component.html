@@ -8,7 +8,7 @@
               <div class="col-7">
                 <div class="text-primary p-4">
                   <h5 class="text-primary">Welcome Back !</h5>
-                  <p>Sign in to continue to Skote.</p>
+                  <p>Sign in to continue to Volvo.</p>
                 </div>
               </div>
               <div class="col-5 align-self-end">
@@ -56,12 +56,19 @@
                   </div>
                 </div>
 
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="remember-check">
-                  <label class="form-check-label" for="remember-check">
-                      Remember me
-                  </label>
-              </div>
+                <div class="mb-3">
+                  <label for="organization" class="form-label">Organization</label>
+                  <select class="form-select" data-trigger name="organization" id="organization"
+                    formControlName="organization" [ngClass]="{ 'is-invalid': submitted && f.organization.errors }">
+                    <option selected disabled>Select Organization</option>
+                    <option value="Volvo">Volvo</option>
+                    <option value="Org2">Org2</option>
+                    <option value="Org3">Org3</option>
+                  </select>
+                  <div *ngIf="submitted && f.organization.errors" class="invalid-feedback">
+                    <div *ngIf="f.organization.errors.required">Organization is required</div>
+                  </div>
+                </div>
 
                 <div class="mt-3 d-grid">
                   <button class="btn btn-primary" type="submit">Log In</button>
