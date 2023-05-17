@@ -3,38 +3,29 @@
     <div class="d-flex">
       <!-- LOGO -->
       <div class="navbar-brand-box">
-        <a routerLink="/" class="logo logo-dark">
-          <span class="logo-sm">
-            <img src="assets/images/logo.svg" alt="" height="22">
-          </span>
-          <span class="logo-lg">
-            <img src="assets/images/logo-dark.png" alt="" height="17">
-          </span>
-        </a>
-
         <a routerLink="/" class="logo logo-light">
           <span class="logo-sm">
-            <img src="assets/images/logo-light.svg" alt="" height="22">
+            <img src="assets/images/volvo-Text.png" alt="" height="30">
           </span>
           <span class="logo-lg">
-            <img src="assets/images/logo-light.png" alt="" height="19">
+            <img src="assets/images/volvo-Text.png" alt="" height="30">
           </span>
         </a>
       </div>
 
-      <button type="button" class="btn btn-sm px-3 font-size-16 d-lg-none header-item" (click)="toggleMenubar()">
+      <!-- <button type="button" class="btn btn-sm px-3 font-size-16 d-lg-none header-item" (click)="toggleMenubar()">
         <i class="fa fa-fw fa-bars"></i>
-      </button>
+      </button> -->
 
       <!-- App Search-->
-      <form class="app-search d-none d-xl-block">
+      <!-- <form class="app-search d-none d-xl-block">
         <div class="position-relative">
           <input type="text" class="form-control" placeholder="{{'HEADER.SEARCH' | translate}}">
           <span class="bx bx-search-alt"></span>
         </div>
-      </form>
+      </form> -->
 
-      <div class="dropdown dropdown-mega d-none d-lg-block me-2" ngbDropdown>
+      <!-- <div class="dropdown dropdown-mega d-none d-lg-block me-2" ngbDropdown>
         <button type="button" class="btn header-item" ngbDropdownToggle>
           {{ 'HEADER.MEGA_MENU' | translate}}
           <i class="mdi mdi-chevron-down"></i>
@@ -162,12 +153,12 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <div class="d-flex">
 
-      <div class="dropdown d-inline-block d-lg-none me-2" ngbDropdown>
+      <!-- <div class="dropdown d-inline-block d-lg-none me-2" ngbDropdown>
         <button type="button" class="btn header-item noti-icon" id="page-header-search-dropdown" ngbDropdownToggle>
           <i class="mdi mdi-magnify"></i>
         </button>
@@ -184,9 +175,9 @@
             </div>
           </form>
         </div>
-      </div>
+      </div> -->
 
-      <div class="dropdown d-inline-block" ngbDropdown>
+      <!-- <div class="dropdown d-inline-block" ngbDropdown>
         <button type="button" class="btn header-item" id="page-header-user-dropdown" ngbDropdownToggle>
           <img *ngIf="flagvalue !== undefined" src="{{flagvalue}}" alt="Header Language" height="16"> <span
             class="ms-1">{{countryName}}</span>
@@ -194,17 +185,17 @@
           <span *ngIf="flagvalue === undefined" class="ms-1">English</span>
         </button>
         <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
-          <!-- item-->
+        
           <a href="javascript:void(0);" class="dropdown-item notify-item" *ngFor="let item of listLang"
             (click)="setLanguage(item.text, item.lang, item.flag)" [ngClass]="{'active': cookieValue === item.lang}">
             <img src="{{item.flag}}" alt="user-image" class="ms-1" height="12"> <span
               class="align-middle">{{item.text}}</span>
           </a>
-          <!-- item-->
+         
         </div>
-      </div>
+      </div> -->
 
-      <div class="dropdown d-none d-lg-inline-block me-1" ngbDropdown>
+      <!-- <div class="dropdown d-none d-lg-inline-block me-1" ngbDropdown>
         <button type="button" class="btn header-item noti-icon" ngbDropdownToggle>
           <i class="bx bx-customize"></i>
         </button>
@@ -253,15 +244,15 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
-      <div class="dropdown d-none d-lg-inline-block me-1">
+      <!-- <div class="dropdown d-none d-lg-inline-block me-1">
         <button type="button" class="btn header-item noti-icon" data-toggle="fullscreen" (click)="fullscreen()">
           <i class="bx bx-fullscreen"></i>
         </button>
-      </div>
+      </div> -->
 
-      <div class="dropdown d-inline-block" ngbDropdown>
+      <!-- <div class="dropdown d-inline-block" ngbDropdown>
         <button type="button" class="btn header-item noti-icon" id="page-header-notifications-dropdown"
           ngbDropdownToggle>
           <i class="bx bx-bell bx-tada"></i>
@@ -347,17 +338,17 @@
             </a>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="dropdown d-inline-block" ngbDropdown>
         <button type="button" class="btn header-item" id="page-header-user-dropdown" ngbDropdownToggle>
-          <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-1.jpg" alt="Header Avatar">
-          <span class="d-none d-xl-inline-block ms-1">Henry</span>
+          <img class="rounded-circle header-profile-user" src="assets/images/Volvo-logo.png" alt="Header Avatar">
+          <span class="d-none d-xl-inline-block ms-1">User Name</span> 
           <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
         </button>
         <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
-          <!-- item-->
-          <a class="dropdown-item" href="javascript: void(0);"><i class="bx bx-user font-size-16 align-middle me-1"></i>
+         
+          <!-- <a class="dropdown-item" href="javascript: void(0);"><i class="bx bx-user font-size-16 align-middle me-1"></i>
             {{ 'HEADER.LOGIN.PROFILE' | translate}}</a>
           <a class="dropdown-item" href="javascript: void(0);"><i
               class="bx bx-wallet font-size-16 align-middle me-1"></i>{{ 'HEADER.LOGIN.MY_WALLET' | translate}}</a>
@@ -367,22 +358,22 @@
           <a class="dropdown-item" href="javascript: void(0);"><i
               class="bx bx-lock-open font-size-16 align-middle me-1"></i>
             {{ 'HEADER.LOGIN.LOCK_SCREEN' | translate}}</a>
-          <div class="dropdown-divider"></div>
+          <div class="dropdown-divider"></div> -->
           <a class="dropdown-item text-danger" href="javascript: void(0);" (click)="logout()"><i
               class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i>
             {{ 'HEADER.LOGIN.LOGOUT' | translate}}</a>
         </div>
       </div>
 
-      <div class="dropdown d-inline-block">
+      <!-- <div class="dropdown d-inline-block">
         <button type="button" class="btn header-item noti-icon right-bar-toggle" (click)="onSettingsButtonClicked()">
           <i class="bx bx-cog bx-spin"></i>
         </button>
-      </div>
+      </div> -->
     </div>
   </div>
 </header>
-<div class="topnav">
+<!-- <div class="topnav" >
   <div class="container-fluid">
     <nav class="navbar navbar-light navbar-expand-lg topnav-menu active">
       <div class="collapse navbar-collapse active" id="topnav-menu-content">
@@ -452,4 +443,4 @@
       </div>
     </nav>
   </div>
-</div>
+</div> -->

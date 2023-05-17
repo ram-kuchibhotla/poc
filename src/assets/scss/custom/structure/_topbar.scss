@@ -274,9 +274,11 @@ body[data-layout="horizontal"] {
     .navbar-brand-box {
         width: auto;
     }
-    .page-content {
-        margin-top: $header-height;
+    .page-content {        
+        margin-top:12px;//$header-height
         padding: calc(55px + #{$grid-gutter-width}) calc(#{$grid-gutter-width} * 0.5) $footer-height calc(#{$grid-gutter-width} * 0.5);
+        padding-bottom:0px!important;
+        border:1px solid #dfdfdf !important;
     }    
 }
 
