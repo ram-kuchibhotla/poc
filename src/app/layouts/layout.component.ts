@@ -25,7 +25,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     // default settings
-    this.layoutType = LAYOUT_VERTICAL;
+    this.layoutType = LAYOUT_HORIZONTAL;
     this.layoutwidth = LAYOUT_WIDTH;
     this.topbar = TOPBAR;
     this.mode = LAYOUT_MODE;
@@ -155,13 +155,6 @@ export class LayoutComponent implements OnInit, AfterViewInit {
         document.body.setAttribute("data-layout-size", "fluid");
         break;
     }
-  }
-
-  /**
-   * Check if the vertical layout is requested
-   */
-  isVerticalLayoutRequested() {
-    return this.layoutType === LAYOUT_VERTICAL;
   }
 
   /**
